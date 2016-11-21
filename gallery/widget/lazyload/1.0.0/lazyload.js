@@ -57,7 +57,7 @@ define(function(require, exports, module) {
             threshold: ~~($window.height() / 3), // Defaults to preload images threshold by 1/3 of viewport
             dataAttribute: dataAttr, // the image original placed in dataset, eg. `data-xxx`
             loadingClass: loadingClass,
-            placeholder: '//s1.bbgstatic.com/s.gif'
+            placeholder: '//s1.zzhstatic.com/lib/assets/images/s.gif'
         }, options));
 
         o.on('reset', function() {
