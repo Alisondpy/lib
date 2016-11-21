@@ -16,7 +16,7 @@ define(function (require, exports, module) {
     var extend = util.extend;
     var clearTimeout = window.clearTimeout;
 
-    var LOADING_ICO_URL = '//' + (window.location<'https'?'s3':'ssl') + '.bbgstatic.com/pub/img/loading/loading32x32.gif';
+    var LOADING_ICO_URL = '//s1.zzhstatic.com/lib/assets/images/loading/loading32x32.gif';
 
     // Pre-load x-box icons, load the font resources in case the icon class been
     // triggered.
