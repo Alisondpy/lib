@@ -177,4 +177,4 @@ layer.show();
 
 ## For more online demo
 
-[demo](http://10.200.51.142:8080/html/demo/test.html#0) - [source code](http://s1.bbgstatic.com/test/js/module/demo/box.js)
+[source code](http://s1.bbgstatic.com/test/js/module/demo/box.js)
