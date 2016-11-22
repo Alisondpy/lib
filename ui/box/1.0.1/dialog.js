@@ -15,7 +15,7 @@ define(function (require, exportsr, module) {
     'use strict';
 
     // load base styles,
-    require('css!./css/dialog.css');
+    // require('css!./css/dialog.css');
 
     var $ = require('jquery');
     var util = require('../../../core/1.0.0/utils/util');
