@@ -80,6 +80,7 @@ gulp.task('copy-md', function() {
 
 //copy-images
 gulp.task('copy-images', function() {
+    console.log(CONFIG);
     return gulp.src(CONFIG.images.src)
         .pipe(gulp.dest(CONFIG.images.dest))
 });
@@ -91,11 +92,11 @@ gulp.task('scripts', function() {
         .pipe(gulp.dest(CONFIG.js.dest)); //输出
 });
 
-//js 压缩
+//css 压缩
 gulp.task('css', function() {
     return gulp.src(CONFIG.css.src)
-        .pipe(gulp.dest(CONFIG.css.dest)) //输出
         .pipe(minifycss()) //压缩
+        .pipe(gulp.dest(CONFIG.css.dest)) //输出
 });
 
 gulp.task('watch', function() {
@@ -113,4 +114,4 @@ gulp.task('release', function() {
 });
 
 //生成环境：1、删除dist目录 2、编译sass，并把编译后的结果发送到dist目录；3、合并js请求
-gulp.task('release', gulp.series('release', 'clear-dist', gulp.parallel('scripts', 'sass', 'css', 'copy-fonts', 'copy-md', 'copy-images'), 'watch'));
+gulp.task('release', gulp.series('release', 'clear-dist', gulp.parallel('scripts', gulp.series('css', 'sass'), 'copy-fonts', 'copy-md', 'copy-images'), 'watch'));

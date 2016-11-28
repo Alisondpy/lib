@@ -18,7 +18,7 @@ var CONFIG = {
         dest: './' + PATH_DIST + '/'
     },
     md: {
-        src: ['./**/*.{md}', '!./node_modules/**/*'],
+        src: ['./**/*.md', '!./node_modules/**/*'],
         dest: './' + PATH_DIST + '/'
     },
     sass: {
@@ -26,7 +26,7 @@ var CONFIG = {
         dest: './' + PATH_DIST + '/'
     },
     css: {
-        src: ['./**/*.{css}', '!./node_modules/**/*'],
+        src: ['./**/*.css', '!./node_modules/**/*'],
         dest: './' + PATH_DIST + '/'
     },
     js: {
