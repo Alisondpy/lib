@@ -1104,9 +1104,9 @@
     /*
      * export via AMD or CommonJS
      * */
-    if (typeof define === 'function' && define.amd) {
-        define(function() {
-            return $;
-        });
-    }
+    // if (typeof define === 'function' && define.amd) {
+    //     define(function() {
+    //         return $;
+    //     });
+    // }
 }));
