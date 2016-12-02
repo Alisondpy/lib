@@ -4,14 +4,14 @@
  * @author Allex Wang (allex.wxn@gmail.com)
  */
 
-(function( root, factory ) {
-    if ( typeof define === 'function' && define.amd ) {
-        define( ['jquery'], factory );
+(function(root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        define(['jquery'], factory);
     } else {
         // Browser globals (root is window)
         root.returnExports = factory(jQuery);
     }
-}(this, function( $ ) {
+}(this, function($) {
     'use strict';
 
     var PAGINATION_DATA_KEY = 'pagination';
@@ -58,13 +58,16 @@
                 }
             }, options || {});
 
-            var self = this, pager = self.pager;
+            var self = this,
+                pager = self.pager;
 
             // batch fix optional callbacks scope.
             $.each(o, function(i, n) {
                 var f = o[n];
                 if (typeof f === 'function') {
-                    o[n] = function() { return f.apply(self, arguments); };
+                    o[n] = function() {
+                        return f.apply(self, arguments);
+                    };
                 }
             });
 
@@ -81,10 +84,13 @@
         },
 
         _initEvents: function() {
-            var self = this, pager = self.pager, o = self.data();
+            var self = this,
+                pager = self.pager,
+                o = self.data();
 
             var readPageFromInput = function() {
-                var input = pager.find('.page-no'), v, pageNum;
+                var input = pager.find('.page-no'),
+                    v, pageNum;
                 if (input.length) {
                     v = input.val();
                     pageNum = parseInt(v, 10);
@@ -119,17 +125,17 @@
 
             if (o.displayInfo) {
                 pager.delegate('.page-no', 'click', function(e) {
-                    this.select();
-                })
-                .delegate('.page-no', 'keydown', function(e) {
-                    if (e.keyCode === 13) { // Enter
+                        this.select();
+                    })
+                    .delegate('.page-no', 'keydown', function(e) {
+                        if (e.keyCode === 13) { // Enter
+                            selectInputPage();
+                        }
+                    })
+                    .delegate('.page-info .ui-button', 'click', function(e) {
+                        e.preventDefault();
                         selectInputPage();
-                    }
-                })
-                .delegate('.page-info .ui-button', 'click', function(e) {
-                    e.preventDefault();
-                    selectInputPage();
-                });
+                    });
             }
 
             // destroy pagination
@@ -245,7 +251,8 @@
         },
 
         _wraper: function(create) {
-            var pager = this.pager, ul = pager[0].tagName.toUpperCase() === 'UL' ? pager : pager.find('ul');
+            var pager = this.pager,
+                ul = pager[0].tagName.toUpperCase() === 'UL' ? pager : pager.find('ul');
             if (!ul.length && create) {
                 return $('<ul></ul>').appendTo(pager);
             }
@@ -269,7 +276,7 @@
 
             // Generate Prev link
             if (o.prevText) {
-                this._appendItem(o.currentPage - 1, {text: o.prevText, classes: 'prev'});
+                this._appendItem(o.currentPage - 1, { text: o.prevText, classes: 'prev' });
             }
 
             // Generate start edges
@@ -305,7 +312,7 @@
 
             // Generate Next link
             if (o.nextText) {
-                this._appendItem(o.currentPage + 1, {text: o.nextText, classes: 'next'});
+                this._appendItem(o.currentPage + 1, { text: o.nextText, classes: 'next' });
             }
 
             // Pager extra info
@@ -368,7 +375,8 @@
         },
 
         _selectPage: function(pageIndex, e) {
-            var self = this, o = self.data();
+            var self = this,
+                o = self.data();
 
             var selectPage = function(pageIndex, e) {
                 o.currentPage = pageIndex;
@@ -379,7 +387,7 @@
             };
 
             if (typeof o.async === 'function') {
-                var deferred = o.async({pageSize: o.pageSize, currentPage: pageIndex + 1});
+                var deferred = o.async({ pageSize: o.pageSize, currentPage: pageIndex + 1 });
                 if (deferred && deferred.then) {
                     if (o.lock) {
                         return self;
