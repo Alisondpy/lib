@@ -8,8 +8,20 @@
  * Copyright 2014-2100, superRaytin
  * Released under the MIT license.
  */
+(function(root, factory) {
+    if (typeof define === "function" && define.amd) {
+        define(["jquery"], function($) {
+            factory(root, $);
+            return $;
+        });
+    } else if (typeof module === "object" && module.exports) {
+        module.exports = factory(require("jquery"));
+    } else {
+        factory(root, jQuery);
+    }
+}(this, function($) {
 
-(function(global, $) {
+
 
     if (typeof $ === 'undefined') {
         throwError('Pagination requires jQuery.');
@@ -187,7 +199,7 @@
 
                 var html = '';
                 var goInput = '<input type="text" class="J-paginationjs-go-pagenumber">';
-                var goButton = '<input type="button" class="J-paginationjs-go-button" value="'+ goButtonText +'">';
+                var goButton = '<input type="button" class="J-paginationjs-go-button" value="' + goButtonText + '">';
                 var formattedString;
                 var i;
 
@@ -207,9 +219,8 @@
                     html += '<div class="paginationjs-pages">';
 
                     if (ulClassName) {
-                        html += '<ul class="'+ ulClassName +'">';
-                    }
-                    else{
+                        html += '<ul class="' + ulClassName + '">';
+                    } else {
                         html += '<ul>';
                     }
 
@@ -217,54 +228,49 @@
                     if (showPrevious) {
                         if (currentPage === 1) {
                             if (!autoHidePrevious) {
-                                html += '<li class="'+ classPrefix +'-prev '+ disableClassName +'"><a>'+ prevText +'<\/a><\/li>';
+                                html += '<li class="' + classPrefix + '-prev ' + disableClassName + '"><a>' + prevText + '<\/a><\/li>';
                             }
-                        }
-                        else{
-                            html += '<li class="'+ classPrefix +'-prev J-paginationjs-previous" data-num="'+ (currentPage - 1) +'" title="Previous page"><a href="'+ pageLink +'">'+ prevText +'<\/a><\/li>';
+                        } else {
+                            html += '<li class="' + classPrefix + '-prev J-paginationjs-previous" data-num="' + (currentPage - 1) + '" title="Previous page"><a href="' + pageLink + '">' + prevText + '<\/a><\/li>';
                         }
                     }
 
                     // Page numbers
                     if (showPageNumbers) {
                         if (rangeStart <= 3) {
-                            for(i = 1; i < rangeStart; i++) {
+                            for (i = 1; i < rangeStart; i++) {
                                 if (i == currentPage) {
-                                    html += '<li class="'+ classPrefix +'-page J-paginationjs-page '+ activeClassName +'" data-num="'+ i +'"><a>'+ i +'<\/a><\/li>';
-                                }
-                                else{
-                                    html += '<li class="'+ classPrefix +'-page J-paginationjs-page" data-num="'+ i +'"><a href="'+ pageLink +'">'+ i +'<\/a><\/li>';
+                                    html += '<li class="' + classPrefix + '-page J-paginationjs-page ' + activeClassName + '" data-num="' + i + '"><a>' + i + '<\/a><\/li>';
+                                } else {
+                                    html += '<li class="' + classPrefix + '-page J-paginationjs-page" data-num="' + i + '"><a href="' + pageLink + '">' + i + '<\/a><\/li>';
                                 }
                             }
-                        }
-                        else{
+                        } else {
                             if (attributes.showFirstOnEllipsisShow) {
-                                html += '<li class="'+ classPrefix +'-page '+ classPrefix +'-first J-paginationjs-page" data-num="1"><a href="'+ pageLink +'">1<\/a><\/li>';
+                                html += '<li class="' + classPrefix + '-page ' + classPrefix + '-first J-paginationjs-page" data-num="1"><a href="' + pageLink + '">1<\/a><\/li>';
                             }
 
-                            html += '<li class="'+ classPrefix +'-ellipsis '+ disableClassName +'"><a>'+ ellipsisText +'<\/a><\/li>';
+                            html += '<li class="' + classPrefix + '-ellipsis ' + disableClassName + '"><a>' + ellipsisText + '<\/a><\/li>';
                         }
 
                         // Main loop
-                        for(i = rangeStart; i <= rangeEnd; i++) {
+                        for (i = rangeStart; i <= rangeEnd; i++) {
                             if (i == currentPage) {
-                                html += '<li class="'+ classPrefix +'-page J-paginationjs-page '+ activeClassName +'" data-num="'+ i +'"><a>'+ i +'<\/a><\/li>';
-                            }
-                            else{
-                                html += '<li class="'+ classPrefix +'-page J-paginationjs-page" data-num="'+ i +'"><a href="'+ pageLink +'">'+ i +'<\/a><\/li>';
+                                html += '<li class="' + classPrefix + '-page J-paginationjs-page ' + activeClassName + '" data-num="' + i + '"><a>' + i + '<\/a><\/li>';
+                            } else {
+                                html += '<li class="' + classPrefix + '-page J-paginationjs-page" data-num="' + i + '"><a href="' + pageLink + '">' + i + '<\/a><\/li>';
                             }
                         }
 
                         if (rangeEnd >= totalPage - 2) {
-                            for(i = rangeEnd + 1; i <= totalPage; i++) {
-                                html += '<li class="'+ classPrefix +'-page J-paginationjs-page" data-num="'+ i +'"><a href="'+ pageLink +'">'+ i +'<\/a><\/li>';
+                            for (i = rangeEnd + 1; i <= totalPage; i++) {
+                                html += '<li class="' + classPrefix + '-page J-paginationjs-page" data-num="' + i + '"><a href="' + pageLink + '">' + i + '<\/a><\/li>';
                             }
-                        }
-                        else{
-                            html += '<li class="'+ classPrefix +'-ellipsis '+ disableClassName +'"><a>'+ ellipsisText +'<\/a><\/li>';
+                        } else {
+                            html += '<li class="' + classPrefix + '-ellipsis ' + disableClassName + '"><a>' + ellipsisText + '<\/a><\/li>';
 
                             if (attributes.showLastOnEllipsisShow) {
-                                html += '<li class="'+ classPrefix +'-page '+ classPrefix +'-last J-paginationjs-page" data-num="'+ totalPage +'"><a href="'+ pageLink +'">'+ totalPage +'<\/a><\/li>';
+                                html += '<li class="' + classPrefix + '-page ' + classPrefix + '-last J-paginationjs-page" data-num="' + totalPage + '"><a href="' + pageLink + '">' + totalPage + '<\/a><\/li>';
                             }
                         }
                     }
@@ -273,11 +279,10 @@
                     if (showNext) {
                         if (currentPage == totalPage) {
                             if (!autoHideNext) {
-                                html += '<li class="'+ classPrefix +'-next '+ disableClassName +'"><a>'+ nextText +'<\/a><\/li>';
+                                html += '<li class="' + classPrefix + '-next ' + disableClassName + '"><a>' + nextText + '<\/a><\/li>';
                             }
-                        }
-                        else{
-                            html += '<li class="'+ classPrefix +'-next J-paginationjs-next" data-num="'+ (currentPage + 1) +'" title="Next page"><a href="'+ pageLink +'">'+ nextText +'<\/a><\/li>';
+                        } else {
+                            html += '<li class="' + classPrefix + '-next J-paginationjs-next" data-num="' + (currentPage + 1) + '" title="Next page"><a href="' + pageLink + '">' + nextText + '<\/a><\/li>';
                         }
                     }
 
@@ -296,7 +301,7 @@
                             totalNumber: totalNumber
                         });
 
-                        html += '<div class="'+ classPrefix +'-nav J-paginationjs-nav">'+ formattedString +'<\/div>';
+                        html += '<div class="' + classPrefix + '-nav J-paginationjs-nav">' + formattedString + '<\/div>';
                     }
                 }
 
@@ -312,7 +317,7 @@
                             input: goInput
                         });
 
-                        html += '<div class="'+ classPrefix +'-go-input">'+ formattedString +'</div>';
+                        html += '<div class="' + classPrefix + '-go-input">' + formattedString + '</div>';
                     }
                 }
 
@@ -328,7 +333,7 @@
                             button: goButton
                         });
 
-                        html += '<div class="'+ classPrefix +'-go-button">'+ formattedString +'</div>';
+                        html += '<div class="' + classPrefix + '-go-button">' + formattedString + '</div>';
                     }
                 }
 
@@ -455,8 +460,7 @@
 
                 if ($.isFunction(customCallback)) {
                     customCallback(data, model);
-                }
-                else if ($.isFunction(attributes.callback)) {
+                } else if ($.isFunction(attributes.callback)) {
                     attributes.callback(data, model);
                 }
             },
@@ -537,9 +541,9 @@
 
                 var formattedString;
 
-                for(var key in variables) {
+                for (var key in variables) {
                     var value = variables[key];
-                    var regexp = new RegExp('<%=\\s*'+ key +'\\s*%>', 'img');
+                    var regexp = new RegExp('<%=\\s*' + key + '\\s*%>', 'img');
 
                     formattedString = (formattedString || template).replace(regexp, value);
                 }
@@ -570,11 +574,9 @@
 
                 if (typeof locator === 'string') {
                     result = locator;
-                }
-                else if ($.isFunction(locator)) {
+                } else if ($.isFunction(locator)) {
                     result = locator();
-                }
-                else{
+                } else {
                     throwError('"locator" is incorrect. (String | Function)');
                 }
 
@@ -589,18 +591,16 @@
 
                 // Data source is an Object, use "locator" to locate the true data
                 if (Helpers.isObject(dataSource)) {
-                    try{
+                    try {
                         $.each(locator.split('.'), function(index, item) {
                             filteredData = (filteredData ? filteredData : dataSource)[item];
                         });
-                    }
-                    catch(e) {}
+                    } catch (e) {}
 
                     if (!filteredData) {
-                        throwError('dataSource.'+ locator +' is undefined.');
-                    }
-                    else if (!Helpers.isArray(filteredData)) {
-                        throwError('dataSource.'+ locator +' must be an Array.');
+                        throwError('dataSource.' + locator + ' is undefined.');
+                    } else if (!Helpers.isArray(filteredData)) {
+                        throwError('dataSource.' + locator + ' must be an Array.');
                     }
                 }
 
@@ -615,11 +615,9 @@
 
                 if (Helpers.isObject(dataSource)) {
                     callback(attributes.dataSource = self.filterDataByLocator(dataSource));
-                }
-                else if (Helpers.isArray(dataSource)) {
+                } else if (Helpers.isArray(dataSource)) {
                     callback(attributes.dataSource = dataSource);
-                }
-                else if ($.isFunction(dataSource)) {
+                } else if ($.isFunction(dataSource)) {
                     attributes.dataSource(function(data) {
                         if ($.isFunction(data)) {
                             throwError('Unexpect parameter of the "done" Function.');
@@ -627,15 +625,13 @@
 
                         args.callee.call(self, data, callback);
                     });
-                }
-                else if (typeof dataSource === 'string') {
+                } else if (typeof dataSource === 'string') {
                     if (/^https?|file:/.test(dataSource)) {
                         attributes.ajaxDataType = 'jsonp';
                     }
 
                     callback(dataSource);
-                }
-                else{
+                } else {
                     throwError('Unexpect data type of the "dataSource".');
                 }
             },
@@ -824,13 +820,12 @@
                 // container.pagination(5)
                 container.trigger.call(this, eventPrefix + 'go', options, arguments[1]);
                 return this;
-            }
-            else if (typeof options === 'string') {
+            } else if (typeof options === 'string') {
 
                 var args = Array.prototype.slice.apply(arguments);
                 args[0] = eventPrefix + args[0];
 
-                switch(options) {
+                switch (options) {
                     case 'previous':
                     case 'next':
                     case 'go':
@@ -843,24 +838,23 @@
                         container.trigger.apply(this, args);
                         break;
 
-                    // Get selected page number
+                        // Get selected page number
                     case 'getSelectedPageNum':
                         if (container.data('pagination').model) {
                             return container.data('pagination').model.pageNumber;
-                        }
-                        else{
+                        } else {
                             return container.data('pagination').attributes.pageNumber;
                         }
 
-                    // Get total page
+                        // Get total page
                     case 'getTotalPage':
                         return container.data('pagination').model.totalPage;
 
-                    // Get selected page data
+                        // Get selected page data
                     case 'getSelectedPageData':
                         return container.data('pagination').currentPageData;
 
-                    // Whether pagination was be disabled
+                        // Whether pagination was be disabled
                     case 'isDisabled':
                         return container.data('pagination').model.disabled === true;
 
@@ -873,8 +867,7 @@
                 // Uninstall the old instance before initialize a new one
                 uninstallPlugin(container);
             }
-        }
-        else{
+        } else {
             if (!Helpers.isObject(options)) {
                 throwError('Illegal options');
             }
@@ -1037,8 +1030,7 @@
         // 'selector' is a jQuery object
         if (typeof selector !== 'string' && selector instanceof jQuery) {
             container = selector;
-        }
-        else{
+        } else {
             container = $(selector);
         }
 
@@ -1058,7 +1050,7 @@
 
     // Throw error
     function throwError(content) {
-        throw new Error('Pagination: '+ content);
+        throw new Error('Pagination: ' + content);
     }
 
     // Check parameters
@@ -1071,17 +1063,14 @@
         if (typeof args.dataSource === 'string') {
             if (typeof args.totalNumber === 'undefined') {
                 throwError('"totalNumber" is required.');
-            }
-            else if (!$.isNumeric(args.totalNumber)) {
+            } else if (!$.isNumeric(args.totalNumber)) {
                 throwError('"totalNumber" is incorrect. (Number)');
             }
-        }
-        else if (Helpers.isObject(args.dataSource)) {
+        } else if (Helpers.isObject(args.dataSource)) {
             if (typeof args.locator === 'undefined') {
                 throwError('"dataSource" is an Object, please specify "locator".');
-            }
-            else if (typeof args.locator !== 'string' && !$.isFunction(args.locator)) {
-                throwError(''+ args.locator +' is incorrect. (String | Function)');
+            } else if (typeof args.locator !== 'string' && !$.isFunction(args.locator)) {
+                throwError('' + args.locator + ' is incorrect. (String | Function)');
             }
         }
     }
@@ -1104,7 +1093,7 @@
 
     // Object type detection
     function getObjectType(object, tmp) {
-        return ( (tmp = typeof(object)) == "object" ? object == null && "null" || Object.prototype.toString.call(object).slice(8, -1) : tmp ).toLowerCase();
+        return ((tmp = typeof(object)) == "object" ? object == null && "null" || Object.prototype.toString.call(object).slice(8, -1) : tmp).toLowerCase();
     }
     $.each(['Object', 'Array'], function(index, name) {
         Helpers['is' + name] = function(object) {
@@ -1120,5 +1109,4 @@
             return $;
         });
     }
-
-})(this, window.jQuery);
+}));
