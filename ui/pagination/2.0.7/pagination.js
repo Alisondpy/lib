@@ -19,7 +19,7 @@
     } else {
         factory(root, jQuery);
     }
-}(this, function($) {
+}(this, function(global, $) {
 
 
 
