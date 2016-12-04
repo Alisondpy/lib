@@ -4,7 +4,6 @@ define(function(require, exports, module) {
     //自定义事件
     var EventEmitter = require('lib/core/1.0.0/event/emitter');
     var Util = require('lib/core/1.0.0/utils/util');
-    var IScroll = require('lib/plugins/iscroll/1.0.0/iscroll-probe');
     var build = require('lib/core/1.0.0/dom/build');
 
     /**
