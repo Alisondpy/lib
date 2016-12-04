@@ -115,7 +115,7 @@
 
             // event delegates
 
-            pager.delegate('.page-link', 'click', function(e) {
+            pager.on('click', '.page-link', function(e) {
                 e.preventDefault();
                 var index = +$(this).data('page-index');
                 if (!isNaN(index)) {
@@ -124,15 +124,15 @@
             });
 
             if (o.displayInfo) {
-                pager.delegate('.page-no', 'click', function(e) {
+                pager.on('click', '.page-no', function(e) {
                         this.select();
                     })
-                    .delegate('.page-no', 'keydown', function(e) {
+                    .on('keydown', '.page-no', function(e) {
                         if (e.keyCode === 13) { // Enter
                             selectInputPage();
                         }
                     })
-                    .delegate('.page-info .ui-button', 'click', function(e) {
+                    .on('click', '.page-info .ui-button', function(e) {
                         e.preventDefault();
                         selectInputPage();
                     });
