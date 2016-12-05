@@ -103,8 +103,8 @@
   text-align: center;
   font-size: 14px;
 }
-/* line 89, uploader.scss */
-.ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .local-container .local-init .btn {
+/* line 90, uploader.scss */
+.ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .local-container .local-init .btn button {
   display: block;
   margin: 0 auto;
   width: 152px;
@@ -114,11 +114,8 @@
   padding: 0;
   background-color: #ea3e48;
   color: #fff;
-}
-/* line 100, uploader.scss */
-.ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .local-container .local-init .btn .uploadify-button-wrapper .uploadify-button {
-  width: 152px;
-  height: 54px;
+  border: 1px solid #ea3e48;
+  border-radius: 2px;
   text-align: center;
 }
 /* line 105, uploader.scss */

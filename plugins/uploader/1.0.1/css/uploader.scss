@@ -87,21 +87,21 @@
                                 font-size: 14px;
                             }
                             .btn {
-                                display: block;
-                                margin: 0 auto;
-                                width: 152px;
-                                height: 54px;
-                                line-height: 54px;
-                                position: relative;
-                                padding: 0;
-                                background-color: #ea3e48;
-                                color: #fff;
+                                button {
+                                    display: block;
+                                    margin: 0 auto;
+                                    width: 152px;
+                                    height: 54px;
+                                    line-height: 54px;
+                                    position: relative;
+                                    padding: 0;
+                                    background-color: #ea3e48;
+                                    color: #fff;
+                                    border: 1px solid #ea3e48;
+                                    border-radius: 2px;
+                                    text-align: center;
+                                }
                                 .uploadify-button-wrapper {
-                                    .uploadify-button {
-                                        width: 152px;
-                                        height: 54px;
-                                        text-align: center;
-                                    }
                                     .swfupload {
                                         position: absolute;
                                         left: 0;

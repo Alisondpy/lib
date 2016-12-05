@@ -6,7 +6,7 @@ define(function(require, exports, module) {
     var Box = require('lib/ui/box/1.0.1/box');
     var Util = require('lib/core/1.0.0/utils/util');
     var build = require('lib/core/1.0.0/dom/build');
-    var Upload = require('lib/plugins/uploadify/3.2.1/uploadify');
+    var Upload = require('lib/plugins/uploadify/3.2.2/uploadify');
     var Widget = require('../widget');
     var Item = require('./item');
 
