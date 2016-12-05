@@ -1,8 +1,62 @@
 /* line 3, uploader.scss */
+.ui-uploader-box * {
+  box-sizing: content-box;
+}
+/* line 6, uploader.scss */
+.ui-uploader-box .btn {
+  display: inline-block;
+  padding: 0 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  height: 26px;
+  line-height: 26px;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 2px;
+}
+/* line 24, uploader.scss */
+.ui-uploader-box .btn-xs {
+  height: 22px;
+  line-height: 22px;
+  padding: 0 6px;
+}
+/* line 29, uploader.scss */
+.ui-uploader-box .btn-lg {
+  height: 54px;
+  line-height: 54px;
+  padding: 0 20px;
+  font-size: 18px;
+}
+/* line 35, uploader.scss */
+.ui-uploader-box .btn-primary {
+  background-color: #ea3e48;
+  border-color: #ea3e48;
+  color: #fff;
+}
+/* line 40, uploader.scss */
+.ui-uploader-box .btn-default {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+/* line 44, uploader.scss */
+.ui-uploader-box .btn-default:hover {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+/* line 50, uploader.scss */
 .ui-uploader-box .clearfix {
   zoom: 1;
 }
-/* line 5, uploader.scss */
+/* line 52, uploader.scss */
 .ui-uploader-box .clearfix:after {
   content: ".";
   display: block;
@@ -10,27 +64,27 @@
   clear: both;
   visibility: hidden;
 }
-/* line 13, uploader.scss */
+/* line 60, uploader.scss */
 .ui-uploader-box .ui-box-bd {
   padding: 0;
 }
-/* line 16, uploader.scss */
+/* line 63, uploader.scss */
 .ui-uploader-box .ui-uploader {
   width: 592px;
   height: 490px;
   margin: 5px 0 0 0;
 }
-/* line 20, uploader.scss */
+/* line 67, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main {
   height: 454px;
   padding: 5px;
 }
-/* line 23, uploader.scss */
+/* line 70, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab {
   float: left;
   width: 470px;
 }
-/* line 26, uploader.scss */
+/* line 73, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-title {
   height: 26px;
   position: relative;
@@ -39,18 +93,18 @@
   left: 0;
   margin: 0;
 }
-/* line 33, uploader.scss */
+/* line 80, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-title li {
   height: 25px;
   float: left;
 }
-/* line 37, uploader.scss */
+/* line 84, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-title li.activate a {
   text-decoration: none;
   background: #fff;
   height: 26px;
 }
-/* line 43, uploader.scss */
+/* line 90, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-title li a {
   display: block;
   height: 25px;
@@ -64,19 +118,19 @@
   background: #F6F6F6;
   color: #000;
 }
-/* line 55, uploader.scss */
+/* line 102, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-title li a:hover {
   text-decoration: none;
   background: #fff;
 }
-/* line 62, uploader.scss */
+/* line 109, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container {
   border: 1px solid #E1E5E6;
   width: 459px;
   height: 418px;
   overflow: hidden;
 }
-/* line 67, uploader.scss */
+/* line 114, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .local-container,
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .network-container,
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .album-container {
@@ -84,11 +138,11 @@
   display: none;
   height: 418px;
 }
-/* line 75, uploader.scss */
+/* line 122, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .local-container {
   position: relative;
 }
-/* line 77, uploader.scss */
+/* line 124, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .local-container .local-init {
   position: absolute;
   left: 0;
@@ -96,14 +150,29 @@
   width: 100%;
   height: 418px;
 }
-/* line 83, uploader.scss */
+/* line 130, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .local-container .local-init .local-tips {
   margin: 120px 0 10px;
   color: #ccc;
   text-align: center;
   font-size: 14px;
 }
-/* line 90, uploader.scss */
+/* line 136, uploader.scss */
+.ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .local-container .local-init .btn {
+  display: block;
+  margin: 0 auto;
+  width: 154px;
+  height: 56px;
+  line-height: 54px;
+  position: relative;
+  padding: 0;
+  background-color: #ea3e48;
+  color: #fff;
+  border: 1px solid #ea3e48;
+  border-radius: 2px;
+  text-align: center;
+}
+/* line 149, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .local-container .local-init .btn button {
   display: block;
   margin: 0 auto;
@@ -118,13 +187,13 @@
   border-radius: 2px;
   text-align: center;
 }
-/* line 105, uploader.scss */
+/* line 164, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .local-container .local-init .btn .uploadify-button-wrapper .swfupload {
   position: absolute;
   left: 0;
   top: 0;
 }
-/* line 113, uploader.scss */
+/* line 172, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .local-container .local-uploading {
   display: none;
   position: absolute;
@@ -132,32 +201,32 @@
   top: 0;
   width: 100%;
 }
-/* line 119, uploader.scss */
+/* line 178, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .local-container .local-uploading .local-op {
   width: 100%;
   height: 25px;
   line-height: 24px;
   border-bottom: 1px solid #DEE0E2;
 }
-/* line 124, uploader.scss */
+/* line 183, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .local-container .local-uploading .local-op div {
   float: right;
   display: block;
   height: 25px;
   line-height: 24px;
 }
-/* line 130, uploader.scss */
+/* line 189, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .local-container .local-uploading .local-op .btn {
   float: right;
   margin: 1px 5px 0 5px;
 }
-/* line 135, uploader.scss */
+/* line 194, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .local-container .local-uploading .img-list {
   height: 391px;
   overflow-y: scroll;
   padding: 0 0 5px 0;
 }
-/* line 139, uploader.scss */
+/* line 198, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .local-container .local-uploading .img-list li {
   border: 1px solid #eee;
   border-radius: 2px;
@@ -168,7 +237,7 @@
   height: 100px;
   margin: 5px 0 0 5px;
 }
-/* line 148, uploader.scss */
+/* line 207, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .local-container .local-uploading .img-list li .img-name {
   width: 100px;
   height: 100px;
@@ -176,7 +245,7 @@
   overflow: hidden;
   padding: 10px 5px;
 }
-/* line 155, uploader.scss */
+/* line 214, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .local-container .local-uploading .img-list li .progress-box {
   width: 100%;
   height: 5px;
@@ -185,13 +254,13 @@
   left: 0;
   bottom: 0;
 }
-/* line 162, uploader.scss */
+/* line 221, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .local-container .local-uploading .img-list li .progress-box .progress-line {
   background-color: #54B5EA;
   width: 0;
   height: 5px;
 }
-/* line 168, uploader.scss */
+/* line 227, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .local-container .local-uploading .img-list li .img-cancel {
   position: absolute;
   display: block;
@@ -205,27 +274,27 @@
   background-color: #54B5EA;
   color: #fff;
 }
-/* line 186, uploader.scss */
+/* line 245, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .local-container-uploading .local-init {
   left: -500px;
 }
-/* line 189, uploader.scss */
+/* line 248, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .local-container-uploading .local-uploading {
   display: block;
 }
-/* line 195, uploader.scss */
+/* line 254, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .network-container .network-main {
   padding: 100px 0 0 28px;
 }
-/* line 197, uploader.scss */
+/* line 256, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .network-container .network-main .network-tips {
   color: #444;
 }
-/* line 200, uploader.scss */
+/* line 259, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .network-container .network-main .network-input {
   padding: 10px 0 0 0;
 }
-/* line 202, uploader.scss */
+/* line 261, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .network-container .network-main .network-input input {
   height: 24px;
   line-height: 24px;
@@ -236,7 +305,7 @@
   border-radius: 3px 0 0 3px;
   padding: 0 5px;
 }
-/* line 212, uploader.scss */
+/* line 271, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .network-container .network-main .network-input a {
   display: block;
   float: left;
@@ -247,24 +316,24 @@
   color: #fff;
   border-radius: 0 3px 3px 0;
 }
-/* line 221, uploader.scss */
+/* line 280, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .network-container .network-main .network-input a:hover {
   background-color: #55BAF1;
 }
-/* line 230, uploader.scss */
+/* line 289, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .album-container .empty {
   width: 100%;
   height: 100%;
   line-height: 416px;
   text-align: center;
 }
-/* line 236, uploader.scss */
+/* line 295, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .album-container .img-list {
   height: 386px;
   overflow-y: scroll;
   padding: 0 0 5px 0;
 }
-/* line 240, uploader.scss */
+/* line 299, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .album-container .img-list li {
   border: 1px solid #eee;
   border-radius: 2px;
@@ -278,14 +347,14 @@
   font-size: 0;
   cursor: pointer;
 }
-/* line 252, uploader.scss */
+/* line 311, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .album-container .img-list li img {
   max-width: 100px;
   max-width: 100px;
   text-align: center;
   vertical-align: middle;
 }
-/* line 258, uploader.scss */
+/* line 317, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .album-container .img-list li .img-list-mask {
   width: 102px;
   height: 102px;
@@ -295,11 +364,11 @@
   background: url(./images/right.png) 50% 50% no-repeat;
   display: none;
 }
-/* line 268, uploader.scss */
+/* line 327, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .uploader-tab .tab-container .album-container .img-list li.activate .img-list-mask {
   display: block;
 }
-/* line 277, uploader.scss */
+/* line 336, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .selected-box {
   float: right;
   overflow: hidden;
@@ -307,21 +376,21 @@
   border: 1px solid #E1E5E6;
   height: 443px;
 }
-/* line 283, uploader.scss */
+/* line 342, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .selected-box .selected-tips {
   height: 25px;
   text-align: center;
   line-height: 24px;
   border-bottom: 1px solid #DEE0E2;
 }
-/* line 289, uploader.scss */
+/* line 348, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .selected-box .selected-op {
   height: 25px;
   text-align: center;
   line-height: 24px;
   border-bottom: 1px solid #DEE0E2;
 }
-/* line 294, uploader.scss */
+/* line 353, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .selected-box .selected-op a {
   display: inline-block;
   line-height: 20px;
@@ -329,18 +398,18 @@
   color: #527CD2;
   font-size: 10px;
 }
-/* line 300, uploader.scss */
+/* line 359, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .selected-box .selected-op a:hover {
   color: #7DC1EF;
   text-decoration: none;
 }
-/* line 306, uploader.scss */
+/* line 365, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .selected-box .selected-images {
   height: 391px;
   padding: 5px 0 5px 5px;
   overflow-y: scroll;
 }
-/* line 310, uploader.scss */
+/* line 369, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .selected-box .selected-images li {
   cursor: pointer;
   margin-bottom: 5px;
@@ -352,13 +421,13 @@
   font-size: 0;
   text-align: center;
 }
-/* line 320, uploader.scss */
+/* line 379, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .selected-box .selected-images li img {
   max-width: 84px;
   max-height: 84px;
   vertical-align: middle;
 }
-/* line 325, uploader.scss */
+/* line 384, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .selected-box .selected-images li .selected-images-op,
 .ui-uploader-box .ui-uploader .uploader-main .selected-box .selected-images li .selected-images-mask {
   display: none;
@@ -368,11 +437,11 @@
   bottom: 0;
   left: 0;
 }
-/* line 334, uploader.scss */
+/* line 393, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .selected-box .selected-images li .selected-images-op {
   z-index: 2;
 }
-/* line 336, uploader.scss */
+/* line 395, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .selected-box .selected-images li .selected-images-op a {
   float: right;
   display: block;
@@ -382,38 +451,38 @@
   color: #ccc;
   font-size: 10px;
 }
-/* line 344, uploader.scss */
+/* line 403, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .selected-box .selected-images li .selected-images-op a:hover {
   color: #fff;
   text-decoration: none;
 }
-/* line 350, uploader.scss */
+/* line 409, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .selected-box .selected-images li .selected-images-mask {
   z-index: 1;
   background-color: #000;
   opacity: 0.5;
   filter: alpha(opacity=50);
 }
-/* line 357, uploader.scss */
+/* line 416, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .selected-box .selected-images li:hover,
 .ui-uploader-box .ui-uploader .uploader-main .selected-box .selected-images li.activate {
   border: 1px solid #7DC1EF;
 }
-/* line 359, uploader.scss */
+/* line 418, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-main .selected-box .selected-images li:hover .selected-images-op,
 .ui-uploader-box .ui-uploader .uploader-main .selected-box .selected-images li:hover .selected-images-mask,
 .ui-uploader-box .ui-uploader .uploader-main .selected-box .selected-images li.activate .selected-images-op,
 .ui-uploader-box .ui-uploader .uploader-main .selected-box .selected-images li.activate .selected-images-mask {
   display: block;
 }
-/* line 368, uploader.scss */
+/* line 427, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-bottom {
   padding: 0 5px;
   height: 36px;
   background: #F3F3F3;
   border-top: 1px solid #E1E5E6;
 }
-/* line 373, uploader.scss */
+/* line 432, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-bottom .tips {
   float: left;
   width: 70%;
@@ -421,32 +490,13 @@
   line-height: 35px;
   color: #444;
 }
-/* line 380, uploader.scss */
+/* line 439, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-bottom .btns {
   float: right;
   width: 30%;
 }
-/* line 383, uploader.scss */
+/* line 442, uploader.scss */
 .ui-uploader-box .ui-uploader .uploader-bottom .btns .btn {
   float: right;
-  margin: 2px 0 0 5px;
-  border-radius: 3px;
-  height: 26px;
-  line-height: 26px;
-  padding: 0 10px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  color: #333;
-}
-/* line 395, uploader.scss */
-.ui-uploader-box .ui-uploader .uploader-bottom .btns .btn-default:hover {
-  color: #333;
-  background-color: #e6e6e6;
-  border-color: #adadad;
-}
-/* line 401, uploader.scss */
-.ui-uploader-box .ui-uploader .uploader-bottom .btns .btn-primary {
-  background-color: #ea3e48;
-  border-color: #ea3e48;
-  color: #fff;
+  margin: 3px 0 0 5px;
 }

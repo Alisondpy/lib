@@ -1,5 +1,52 @@
 @charset "UTF-8";
 .ui-uploader-box {
+    * {
+        box-sizing: content-box;
+    }
+    .btn {
+        display: inline-block;
+        padding: 0 12px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: 400;
+        height: 26px;
+        line-height: 26px;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        touch-action: manipulation;
+        cursor: pointer;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 2px;
+    }
+    .btn-xs {
+        height: 22px;
+        line-height: 22px;
+        padding: 0 6px;
+    }
+    .btn-lg {
+        height: 54px;
+        line-height: 54px;
+        padding: 0 20px;
+        font-size: 18px;
+    }
+    .btn-primary {
+        background-color: #ea3e48;
+        border-color: #ea3e48;
+        color: #fff;
+    }
+    .btn-default {
+        color: #333;
+        background-color: #fff;
+        border-color: #ccc;
+        &:hover {
+            color: #333;
+            background-color: #e6e6e6;
+            border-color: #adadad;
+        }
+    }
     .clearfix {
         zoom: 1;
         &:after {
@@ -87,6 +134,18 @@
                                 font-size: 14px;
                             }
                             .btn {
+                                display: block;
+                                margin: 0 auto;
+                                width: 154px;
+                                height: 56px;
+                                line-height: 54px;
+                                position: relative;
+                                padding: 0;
+                                background-color: #ea3e48;
+                                color: #fff;
+                                border: 1px solid #ea3e48;
+                                border-radius: 2px;
+                                text-align: center;
                                 button {
                                     display: block;
                                     margin: 0 auto;
@@ -382,26 +441,7 @@
                 width: 30%;
                 .btn {
                     float: right;
-                    margin: 2px 0 0 5px;
-                    border-radius: 3px;
-                    height: 26px;
-                    line-height: 26px;
-                    padding: 0 10px;
-                    background-color: #fff;
-                    border: 1px solid #ccc;
-                    color: #333;
-                }
-                .btn-default {
-                    &:hover {
-                        color: #333;
-                        background-color: #e6e6e6;
-                        border-color: #adadad;
-                    }
-                }
-                .btn-primary {
-                    background-color: #ea3e48;
-                    border-color: #ea3e48;
-                    color: #fff;
+                    margin: 3px 0 0 5px;
                 }
             }
         }
