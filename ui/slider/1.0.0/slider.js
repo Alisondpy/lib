@@ -11,7 +11,7 @@ define(function(require, exports, module) {
     var $ = require('jquery');
     var imageUtil = require('../../../gallery/utils/1.0.0/image');
 
-    $.fn.slide = function(options) {
+    $.fn.slider = function(options) {
         var defautls = {
             attr: 'data-img', // 实际的地址
             duration: 5000, // 每个多久轮播一次
@@ -22,16 +22,16 @@ define(function(require, exports, module) {
         var opts = $.extend({}, defautls, options || {});
 
         $(this).each(function() {
-            var eSlide = $(this);
-            addSlide(eSlide);
+            var eslider = $(this);
+            addslider(eslider);
         });
 
-        function addSlide(eSlide) {
-            var eSlideItems = eSlide.find('.slide-list li');
-            if (eSlideItems && eSlideItems.length == 0) {
+        function addslider(eslider) {
+            var esliderItems = eslider.find('.slider-list li');
+            if (esliderItems && esliderItems.length == 0) {
                 return;
             }
-            var eNums = eSlide.find('.slide-num a');
+            var eNums = eslider.find('.slider-num a');
             var isStop = false,
                 oldIndex = 0,
                 curIndex = 0,
@@ -47,15 +47,15 @@ define(function(require, exports, module) {
                 setCurrent();
             });
             if (opts.addBtn) {
-                addBtn(eSlide);
+                addBtn(eslider);
             }
 
 
             // 设置当前切换的效果
             function setCurrent() {
                 eNums.eq(curIndex).addClass('hover').siblings("a").removeClass("hover");
-                var curItem = eSlideItems.eq(curIndex);
-                var oldItem = eSlideItems.eq(oldIndex);
+                var curItem = esliderItems.eq(curIndex);
+                var oldItem = esliderItems.eq(oldIndex);
                 var dataImg = curItem.attr(attr);
                 curItem.show();
                 if (dataImg) {
@@ -84,12 +84,12 @@ define(function(require, exports, module) {
             }
 
             // 自动轮播判断
-            function autoSlide() {
+            function autoslider() {
                 if (opts.duration > 0) {
-                    eSlide.mouseenter(function() {
+                    eslider.mouseenter(function() {
                         isStop = true;
                     });
-                    eSlide.mouseleave(function() {
+                    eslider.mouseleave(function() {
                         isStop = false;
                     });
                     setInterval(function() {
@@ -115,9 +115,9 @@ define(function(require, exports, module) {
                 setCurrent();
             }
 
-            function addBtn(eSlide) {
+            function addBtn(eslider) {
                 //添加按钮容器
-                var $btns = $('<a class="arrow-l jImgLeft" href="javascript:;"><em></em><i class="icon iconfont"></i></a><a class="arrow-r jImgRight" href="javascript:;"><em></em><i class="icon iconfont"></i></a>').appendTo(eSlide);
+                var $btns = $('<a class="arrow-l jImgLeft" href="javascript:;"><em></em><i class="icon iconfont"></i></a><a class="arrow-r jImgRight" href="javascript:;"><em></em><i class="icon iconfont"></i></a>').appendTo(eslider);
                 var leftBtn = $btns.filter(".jImgLeft").hide();
                 var rightBtn = $btns.filter(".jImgRight").hide();
                 //绑定事件
@@ -128,11 +128,11 @@ define(function(require, exports, module) {
                     toggleNext(true);
                 });
                 //绑定左右轮播按钮的显示和隐藏事件
-                eSlide.mouseenter(function() {
+                eslider.mouseenter(function() {
                     leftBtn.show();
                     rightBtn.show();
                 });
-                eSlide.mouseleave(function() {
+                eslider.mouseleave(function() {
                     leftBtn.hide();
                     rightBtn.hide();
                 });
@@ -140,14 +140,14 @@ define(function(require, exports, module) {
 
 
             function loadingStatus() {
-                eSlide.find(".slide-list").css({
+                eslider.find(".slider-list").css({
                     background: 'none'
                 });
             }
 
             setCurrent();
             loadingStatus();
-            autoSlide();
+            autoslider();
         }
     };
 });
