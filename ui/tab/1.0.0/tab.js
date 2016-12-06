@@ -39,7 +39,7 @@ define(function(require, exports, module) {
     Util.inherits(Tab, EventEmitter);
     Tab.prototype._initEvent = function() {
         var _this = this;
-        _this.hd.on(_this.options.event, 'li', function(e) {
+        _this.hdItems.on(_this.options.event, function(e) {
             var $li = $(this);
             if (!$li.hasClass('current')) {
                 _this.setCurrent($li.attr('data-target'));
