@@ -27,7 +27,7 @@ define(function(require, exports, module) {
             fileSizeLimit: '2048KB', // 单个图片大小限制,默认2M
             formData: { // 给 uploader 的参数
             },
-            swf: 'http://s1.zzhstatic.com/lib/plugins/uploader/1.0.1/uploadify.swf',
+            swf: 'http://s1.zhongzhihui.com/lib/plugins/uploader/1.0.1/uploadify.swf',
             uploader: '/api/upload.php',
             buttonText: '本地上传',
             buttonClass: '',
