@@ -40,6 +40,7 @@ define(function(require, exports, module) {
     Tab.prototype._initEvent = function() {
         var _this = this;
         _this.hdItems.on(_this.options.event, function(e) {
+            e.preventDefault();
             var $li = $(this);
             if (!$li.hasClass('current')) {
                 _this.setCurrent($li.attr('data-target'));
