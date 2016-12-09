@@ -233,6 +233,19 @@
             return this;
         },
 
+
+        show: function() {
+            var self = this,
+                pager = self.pager;
+            pager.show();
+        },
+
+        hide: function() {
+            var self = this,
+                pager = self.pager;
+            pager.hide();
+        },
+
         setTotalCount: function(totalCount, silent) {
             var o = this.data();
             o.totalCount = totalCount;
