@@ -4,12 +4,12 @@ Copyright (c) 2012 Reactive Apps, Ronnie Garcia
 Released under the MIT License <http://www.opensource.org/licenses/mit-license.php>
 Last modified by Allex Wang (allex.wxn@gmail.com)
 */
-(function f(e, f, o) {
-  if ("function" == typeof define && define.amd) define(o); else if ("undefined" != typeof module) o(require, module.exports, module); else {
-    var n = {exports: {}};
-    o(null, n.exports, n), e[f] = n.exports;
-  }
-}(this, 'Uploadify', function( require, exports, module ) {
+/**
+ * Common sso login box.
+ *
+ * @author Allex Wang (allex.wxn@gmail.com)
+ */
+define(function(require, exports, module) {
     'use strict';
 
     var $ = require('jquery');
@@ -17,14 +17,16 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
     var SWFUpload = require('../../swfupload/2.2/swfupload');
 
     function forEach(o, fn) {
-        var i = -1, l = o.length;
+        var i = -1,
+            l = o.length;
         if (o.forEach) o.forEach(fn)
         else if (l) {
             while (++i < l) fn(o[i], i);
         } else {
-            for (i in o) if (o.hasOwnProperty(i)) {
-                fn(o[i], i);
-            }
+            for (i in o)
+                if (o.hasOwnProperty(i)) {
+                    fn(o[i], i);
+                }
         }
     }
 
@@ -33,7 +35,7 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
             width: elem.offsetWidth,
             height: elem.offsetHeight
         };
-        var sides = {'width': ['left', 'right'], 'height': ['top', 'bottom']};
+        var sides = { 'width': ['left', 'right'], 'height': ['top', 'bottom'] };
         var $el = $(elem);
         forEach(size, function(v, k) {
             forEach(sides[k], function(side, i) {
@@ -45,9 +47,9 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
     }
 
     // These methods can be called by adding them as the first argument in the uploadify plugin call
-    var methods = {// {{{
+    var methods = { // {{{
 
-        init : function(options, swfUploadOptions) {
+        init: function(options, swfUploadOptions) {
 
             return this.each(function(i, el) {
 
@@ -58,104 +60,104 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
                 var $clone = $this.clone();
 
                 // Setup the default options
-                var settings = $.extend({// {{{
+                var settings = $.extend({ // {{{
                     // Required Settings
-                    id       : $this.attr('id'), // The ID of the DOM object
-                    swf      : 'uploadify.swf',  // The path to the uploadify SWF file
-                    uploader : 'uploadify.php',  // The path to the server-side upload script
+                    id: $this.attr('id'), // The ID of the DOM object
+                    swf: 'uploadify.swf', // The path to the uploadify SWF file
+                    uploader: 'uploadify.php', // The path to the server-side upload script
 
                     // Options
-                    auto            : true,               // Automatically upload files when added to the queue
-                    buttonClass     : '',                 // A class name to add to the browse button DOM object
-                    buttonCursor    : 'hand',             // The cursor to use with the browse button
-                    buttonImage     : null,               // (String or null) The path to an image to use for the Flash browse button if not using CSS to style the button
-                    buttonText      : 'SELECT FILES',     // The text to use for the browse button
-                    checkExisting   : false,              // The path to a server-side script that checks for existing files on the server
-                    debug           : false,              // Turn on swfUpload debugging mode
-                    fileObjName     : 'Filedata',         // The name of the file object to use in your server-side script
-                    fileSizeLimit   : 0,                  // The maximum size of an uploadable file in KB (Accepts units B KB MB GB if string, 0 for no limit)
-                    fileTypeDesc    : 'All Files',        // The description for file types in the browse dialog
-                    fileTypeExts    : '*.*',              // Allowed extensions in the browse dialog (server-side validation should also be used)
-                    height          : 30,                 // The height of the browse button
-                    itemTemplate    : false,              // The template for the file item in the queue
-                    method          : 'post',             // The method to use when sending files to the server-side upload script
-                    multi           : true,               // Allow multiple file selection in the browse dialog
-                    formData        : {},                 // An object with additional data to send to the server-side upload script with every file upload
-                    preventCaching  : true,               // Adds a random value to the Flash URL to prevent caching of it (conflicts with existing parameters)
-                    progressData    : 'percentage',       // ('percentage' or 'speed') Data to show in the queue item during a file upload
-                    queueID         : false,              // The ID of the DOM object to use as a file queue (without the #)
-                    queueSizeLimit  : 999,                // The maximum number of files that can be in the queue at one time
-                    removeCompleted : true,               // Remove queue items from the queue when they are done uploading
-                    removeTimeout   : 3,                  // The delay in seconds before removing a queue item if removeCompleted is set to true
-                    requeueErrors   : false,              // Keep errored files in the queue and keep trying to upload them
-                    successTimeout  : 30,                 // The number of seconds to wait for Flash to detect the server's response after the file has finished uploading
-                    uploadLimit     : 0,                  // The maximum number of files you can upload
-                    width           : 120,                // The width of the browse button
+                    auto: true, // Automatically upload files when added to the queue
+                    buttonClass: '', // A class name to add to the browse button DOM object
+                    buttonCursor: 'hand', // The cursor to use with the browse button
+                    buttonImage: null, // (String or null) The path to an image to use for the Flash browse button if not using CSS to style the button
+                    buttonText: 'SELECT FILES', // The text to use for the browse button
+                    checkExisting: false, // The path to a server-side script that checks for existing files on the server
+                    debug: false, // Turn on swfUpload debugging mode
+                    fileObjName: 'Filedata', // The name of the file object to use in your server-side script
+                    fileSizeLimit: 0, // The maximum size of an uploadable file in KB (Accepts units B KB MB GB if string, 0 for no limit)
+                    fileTypeDesc: 'All Files', // The description for file types in the browse dialog
+                    fileTypeExts: '*.*', // Allowed extensions in the browse dialog (server-side validation should also be used)
+                    height: 30, // The height of the browse button
+                    itemTemplate: false, // The template for the file item in the queue
+                    method: 'post', // The method to use when sending files to the server-side upload script
+                    multi: true, // Allow multiple file selection in the browse dialog
+                    formData: {}, // An object with additional data to send to the server-side upload script with every file upload
+                    preventCaching: true, // Adds a random value to the Flash URL to prevent caching of it (conflicts with existing parameters)
+                    progressData: 'percentage', // ('percentage' or 'speed') Data to show in the queue item during a file upload
+                    queueID: false, // The ID of the DOM object to use as a file queue (without the #)
+                    queueSizeLimit: 999, // The maximum number of files that can be in the queue at one time
+                    removeCompleted: true, // Remove queue items from the queue when they are done uploading
+                    removeTimeout: 3, // The delay in seconds before removing a queue item if removeCompleted is set to true
+                    requeueErrors: false, // Keep errored files in the queue and keep trying to upload them
+                    successTimeout: 30, // The number of seconds to wait for Flash to detect the server's response after the file has finished uploading
+                    uploadLimit: 0, // The maximum number of files you can upload
+                    width: 120, // The width of the browse button
 
                     // Events
-                    overrideEvents  : []             // (Array) A list of default event handlers to skip
-                    /*
-                    onCancel         // Triggered when a file is cancelled from the queue
-                    onClearQueue     // Triggered during the 'clear queue' method
-                    onDestroy        // Triggered when the uploadify object is destroyed
-                    onDialogClose    // Triggered when the browse dialog is closed
-                    onDialogOpen     // Triggered when the browse dialog is opened
-                    onDisable        // Triggered when the browse button gets disabled
-                    onEnable         // Triggered when the browse button gets enabled
-                    onFallback       // Triggered is Flash is not detected
-                    onInit           // Triggered when Uploadify is initialized
-                    onQueueComplete  // Triggered when all files in the queue have been uploaded
-                    onSelectError    // Triggered when an error occurs while selecting a file (file size, queue size limit, etc.)
-                    onSelect         // Triggered for each file that is selected
-                    onSWFReady       // Triggered when the SWF button is loaded
-                    onUploadComplete // Triggered when a file upload completes (success or error)
-                    onUploadError    // Triggered when a file upload returns an error
-                    onUploadSuccess  // Triggered when a file is uploaded successfully
-                    onUploadProgress // Triggered every time a file progress is updated
-                    onUploadStart    // Triggered immediately before a file upload starts
-                    */
-                }, options);// }}}
+                    overrideEvents: [] // (Array) A list of default event handlers to skip
+                        /*
+                        onCancel         // Triggered when a file is cancelled from the queue
+                        onClearQueue     // Triggered during the 'clear queue' method
+                        onDestroy        // Triggered when the uploadify object is destroyed
+                        onDialogClose    // Triggered when the browse dialog is closed
+                        onDialogOpen     // Triggered when the browse dialog is opened
+                        onDisable        // Triggered when the browse button gets disabled
+                        onEnable         // Triggered when the browse button gets enabled
+                        onFallback       // Triggered is Flash is not detected
+                        onInit           // Triggered when Uploadify is initialized
+                        onQueueComplete  // Triggered when all files in the queue have been uploaded
+                        onSelectError    // Triggered when an error occurs while selecting a file (file size, queue size limit, etc.)
+                        onSelect         // Triggered for each file that is selected
+                        onSWFReady       // Triggered when the SWF button is loaded
+                        onUploadComplete // Triggered when a file upload completes (success or error)
+                        onUploadError    // Triggered when a file upload returns an error
+                        onUploadSuccess  // Triggered when a file is uploaded successfully
+                        onUploadProgress // Triggered every time a file progress is updated
+                        onUploadStart    // Triggered immediately before a file upload starts
+                        */
+                }, options); // }}}
 
                 // Prepare settings for SWFUpload
-                var swfUploadSettings = {// {{{
-                    assume_success_timeout   : settings.successTimeout,
-                    button_placeholder_id    : settings.id,
-                    button_width             : settings.width,
-                    button_height            : settings.height,
-                    button_text              : null,
-                    button_text_style        : null,
-                    button_text_top_padding  : 0,
-                    button_text_left_padding : 0,
-                    button_action            : (settings.multi ? SWFUpload.BUTTON_ACTION.SELECT_FILES : SWFUpload.BUTTON_ACTION.SELECT_FILE),
-                    button_disabled          : false,
-                    button_cursor            : (settings.buttonCursor == 'arrow' ? SWFUpload.CURSOR.ARROW : SWFUpload.CURSOR.HAND),
-                    button_window_mode       : SWFUpload.WINDOW_MODE.TRANSPARENT,
-                    debug                    : settings.debug,
-                    requeue_on_error         : settings.requeueErrors,
-                    file_post_name           : settings.fileObjName,
-                    file_size_limit          : settings.fileSizeLimit,
-                    file_types               : settings.fileTypeExts,
-                    file_types_description   : settings.fileTypeDesc,
-                    file_queue_limit         : settings.queueSizeLimit,
-                    file_upload_limit        : settings.uploadLimit,
-                    flash_url                : settings.swf,
-                    prevent_swf_caching      : settings.preventCaching,
-                    post_params              : settings.formData,
-                    upload_url               : settings.uploader,
-                    use_query_string         : (settings.method == 'get'),
+                var swfUploadSettings = { // {{{
+                    assume_success_timeout: settings.successTimeout,
+                    button_placeholder_id: settings.id,
+                    button_width: settings.width,
+                    button_height: settings.height,
+                    button_text: null,
+                    button_text_style: null,
+                    button_text_top_padding: 0,
+                    button_text_left_padding: 0,
+                    button_action: (settings.multi ? SWFUpload.BUTTON_ACTION.SELECT_FILES : SWFUpload.BUTTON_ACTION.SELECT_FILE),
+                    button_disabled: false,
+                    button_cursor: (settings.buttonCursor == 'arrow' ? SWFUpload.CURSOR.ARROW : SWFUpload.CURSOR.HAND),
+                    button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
+                    debug: settings.debug,
+                    requeue_on_error: settings.requeueErrors,
+                    file_post_name: settings.fileObjName,
+                    file_size_limit: settings.fileSizeLimit,
+                    file_types: settings.fileTypeExts,
+                    file_types_description: settings.fileTypeDesc,
+                    file_queue_limit: settings.queueSizeLimit,
+                    file_upload_limit: settings.uploadLimit,
+                    flash_url: settings.swf,
+                    prevent_swf_caching: settings.preventCaching,
+                    post_params: settings.formData,
+                    upload_url: settings.uploader,
+                    use_query_string: (settings.method == 'get'),
 
                     // Event Handlers
-                    file_dialog_complete_handler : handlers.onDialogClose,
-                    file_dialog_start_handler    : handlers.onDialogOpen,
-                    file_queued_handler          : handlers.onSelect,
-                    file_queue_error_handler     : handlers.onSelectError,
-                    swfupload_loaded_handler     : settings.onSWFReady,
-                    upload_complete_handler      : handlers.onUploadComplete,
-                    upload_error_handler         : handlers.onUploadError,
-                    upload_progress_handler      : handlers.onUploadProgress,
-                    upload_start_handler         : handlers.onUploadStart,
-                    upload_success_handler       : handlers.onUploadSuccess
-                };// }}}
+                    file_dialog_complete_handler: handlers.onDialogClose,
+                    file_dialog_start_handler: handlers.onDialogOpen,
+                    file_queued_handler: handlers.onSelect,
+                    file_queue_error_handler: handlers.onSelectError,
+                    swfupload_loaded_handler: settings.onSWFReady,
+                    upload_complete_handler: handlers.onUploadComplete,
+                    upload_error_handler: handlers.onUploadError,
+                    upload_progress_handler: handlers.onUploadProgress,
+                    upload_start_handler: handlers.onUploadStart,
+                    upload_success_handler: handlers.onUploadSuccess
+                }; // }}}
 
                 // Merge the user-defined options with the defaults
                 if (swfUploadOptions) {
@@ -165,7 +167,7 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
                 swfUploadSettings = $.extend(swfUploadSettings, settings);
 
                 // Detect if Flash is available
-                var playerVersion  = swfobject.getFlashPlayerVersion();
+                var playerVersion = swfobject.getFlashPlayerVersion();
                 var flashInstalled = (playerVersion.major >= 9);
 
                 if (flashInstalled) {
@@ -173,8 +175,8 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
 
                     if (!$('#uploadify-css')[0]) {
                         var _css = '.uploadify-button-wrapper{position:absolute;top:0;left:0;}'
-                            $('head').append('<style type="text/css" id="uploadify-css">' +
-                                (settings.css || _css) + (settings.cssAddon || '') + '</style>');
+                        $('head').append('<style type="text/css" id="uploadify-css">' +
+                            (settings.css || _css) + (settings.cssAddon || '') + '</style>');
                     }
 
                     if ($this.css('position') === 'static') {
@@ -210,8 +212,8 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
                     // Create the file queue wrapper container
                     if (!settings.queueID) {
                         var $queue = $('<div />', {
-                          'id'    : settings.id + '-queue',
-                          'class' : 'uploadify-queue'
+                            'id': settings.id + '-queue',
+                            'class': 'uploadify-queue'
                         });
                         $wrapper.after($queue);
                         swfuploadify.settings.queueID = settings.id + '-queue';
@@ -220,28 +222,28 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
 
                     // Create some queue related objects and variables
                     swfuploadify.queueData = {
-                        files              : {}, // The files in the queue
-                        filesSelected      : 0, // The number of files selected in the last select operation
-                        filesQueued        : 0, // The number of files added to the queue in the last select operation
-                        filesReplaced      : 0, // The number of files replaced in the last select operation
-                        filesCancelled     : 0, // The number of files that were cancelled instead of replaced
-                        filesErrored       : 0, // The number of files that caused error in the last select operation
-                        uploadsSuccessful  : 0, // The number of files that were successfully uploaded
-                        uploadsErrored     : 0, // The number of files that returned errors during upload
-                        averageSpeed       : 0, // The average speed of the uploads in KB
-                        queueLength        : 0, // The number of files in the queue
-                        queueSize          : 0, // The size in bytes of the entire queue
-                        uploadSize         : 0, // The size in bytes of the upload queue
-                        queueBytesUploaded : 0, // The size in bytes that have been uploaded for the current upload queue
-                        uploadQueue        : [], // The files currently to be uploaded
-                        errorMsg           : 'Some files were not added to the queue:'
+                        files: {}, // The files in the queue
+                        filesSelected: 0, // The number of files selected in the last select operation
+                        filesQueued: 0, // The number of files added to the queue in the last select operation
+                        filesReplaced: 0, // The number of files replaced in the last select operation
+                        filesCancelled: 0, // The number of files that were cancelled instead of replaced
+                        filesErrored: 0, // The number of files that caused error in the last select operation
+                        uploadsSuccessful: 0, // The number of files that were successfully uploaded
+                        uploadsErrored: 0, // The number of files that returned errors during upload
+                        averageSpeed: 0, // The average speed of the uploads in KB
+                        queueLength: 0, // The number of files in the queue
+                        queueSize: 0, // The size in bytes of the entire queue
+                        uploadSize: 0, // The size in bytes of the upload queue
+                        queueBytesUploaded: 0, // The size in bytes that have been uploaded for the current upload queue
+                        uploadQueue: [], // The files currently to be uploaded
+                        errorMsg: 'Some files were not added to the queue:'
                     };
 
                     // Save references to all the objects
                     swfuploadify.original = $clone;
-                    swfuploadify.wrapper  = $wrapper;
-                    swfuploadify.button   = $button;
-                    swfuploadify.queue    = $queue;
+                    swfuploadify.wrapper = $wrapper;
+                    swfuploadify.button = $button;
+                    swfuploadify.queue = $queue;
 
                     // Call the user-defined init event handler
                     if (settings.onInit) settings.onInit.call($this, swfuploadify);
@@ -255,16 +257,16 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
         },
 
         // Stop a file upload and remove it from the queue
-        cancel : function(fileID, supressEvent) {
+        cancel: function(fileID, supressEvent) {
 
             var args = arguments;
 
             this.each(function() {
                 // Create a reference to the jQuery DOM object
-                var $this        = $(this),
+                var $this = $(this),
                     swfuploadify = $this.data('uploadify'),
-                    settings     = swfuploadify.settings,
-                    delay        = -1;
+                    settings = swfuploadify.settings,
+                    delay = -1;
 
                 if (args[0]) {
                     // Clear the queue
@@ -283,7 +285,7 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
                                 $(this).remove();
                             });
                         });
-                        swfuploadify.queueData.queueSize   = 0;
+                        swfuploadify.queueData.queueSize = 0;
                         swfuploadify.queueData.queueLength = 0;
                         // Trigger the onClearQueue event
                         if (settings.onClearQueue) settings.onClearQueue.call($this, queueItemCount);
@@ -312,13 +314,13 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
         },
 
         // Revert the DOM object back to its original state
-        destroy : function() {
+        destroy: function() {
 
             this.each(function() {
                 // Create a reference to the jQuery DOM object
-                var $this        = $(this),
+                var $this = $(this),
                     swfuploadify = $this.data('uploadify'),
-                    settings     = swfuploadify.settings;
+                    settings = swfuploadify.settings;
 
                 // Destroy the SWF object and
                 swfuploadify.destroy();
@@ -340,13 +342,13 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
         },
 
         // Disable the select button
-        disable : function(isDisabled) {
+        disable: function(isDisabled) {
 
             this.each(function() {
                 // Create a reference to the jQuery DOM object
-                var $this        = $(this),
+                var $this = $(this),
                     swfuploadify = $this.data('uploadify'),
-                    settings     = swfuploadify.settings;
+                    settings = swfuploadify.settings;
 
                 // Call the user-defined event handlers
                 if (isDisabled) {
@@ -364,24 +366,24 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
         },
 
         // Get or set the settings data
-        settings : function(name, value, resetObjects) {
+        settings: function(name, value, resetObjects) {
 
-            var args        = arguments;
+            var args = arguments;
             var returnValue = value;
 
             this.each(function() {
                 // Create a reference to the jQuery DOM object
-                var $this        = $(this),
+                var $this = $(this),
                     swfuploadify = $this.data('uploadify'),
-                    settings     = swfuploadify.settings;
+                    settings = swfuploadify.settings;
 
                 if (typeof(args[0]) == 'object') {
                     for (var n in value) {
-                        setData(n,value[n]);
+                        setData(n, value[n]);
                     }
                 }
                 if (args.length === 1) {
-                    returnValue =  settings[name];
+                    returnValue = settings[name];
                 } else {
                     switch (name) {
                         case 'uploader':
@@ -456,18 +458,18 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
         },
 
         // Stop the current uploads and requeue what is in progress
-        stop : function() {
+        stop: function() {
 
             this.each(function() {
                 // Create a reference to the jQuery DOM object
-                var $this        = $(this),
+                var $this = $(this),
                     swfuploadify = $this.data('uploadify');
 
                 // Reset the queue information
-                swfuploadify.queueData.averageSpeed  = 0;
-                swfuploadify.queueData.uploadSize    = 0;
+                swfuploadify.queueData.averageSpeed = 0;
+                swfuploadify.queueData.uploadSize = 0;
                 swfuploadify.queueData.bytesUploaded = 0;
-                swfuploadify.queueData.uploadQueue   = [];
+                swfuploadify.queueData.uploadQueue = [];
 
                 swfuploadify.stopUpload();
             });
@@ -475,20 +477,20 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
         },
 
         // Start uploading files in the queue
-        upload : function() {
+        upload: function() {
 
             var args = arguments;
 
             this.each(function() {
                 // Create a reference to the jQuery DOM object
-                var $this        = $(this),
+                var $this = $(this),
                     swfuploadify = $this.data('uploadify');
 
                 // Reset the queue information
-                swfuploadify.queueData.averageSpeed  = 0;
-                swfuploadify.queueData.uploadSize    = 0;
+                swfuploadify.queueData.averageSpeed = 0;
+                swfuploadify.queueData.uploadSize = 0;
                 swfuploadify.queueData.bytesUploaded = 0;
-                swfuploadify.queueData.uploadQueue   = [];
+                swfuploadify.queueData.uploadQueue = [];
 
                 // Upload the files
                 if (args[0]) {
@@ -511,19 +513,19 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
 
         }
 
-    };// }}}
+    }; // }}}
 
     // These functions handle all the events that occur with the file uploader
-    var handlers = {// {{{
+    var handlers = { // {{{
 
         // Triggered when the file dialog is opened
-        onDialogOpen : function() {
+        onDialogOpen: function() {
             // Load the swfupload settings
             var settings = this.settings;
 
             // Reset some queue info
-			      this.queueData.errorMsg       = 'Some files were not added to the queue:';
-            this.queueData.filesReplaced  = 0;
+            this.queueData.errorMsg = 'Some files were not added to the queue:';
+            this.queueData.filesReplaced = 0;
             this.queueData.filesCancelled = 0;
 
             // Call the user-defined event handler
@@ -531,15 +533,15 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
         },
 
         // Triggered when the browse dialog is closed
-        onDialogClose :  function(filesSelected, filesQueued, queueLength) {
+        onDialogClose: function(filesSelected, filesQueued, queueLength) {
             // Load the swfupload settings
             var settings = this.settings;
 
             // Update the queue information
-            this.queueData.filesErrored  = filesSelected - filesQueued;
+            this.queueData.filesErrored = filesSelected - filesQueued;
             this.queueData.filesSelected = filesSelected;
-            this.queueData.filesQueued   = filesQueued - this.queueData.filesCancelled;
-            this.queueData.queueLength   = queueLength;
+            this.queueData.filesQueued = filesQueued - this.queueData.filesCancelled;
+            this.queueData.queueLength = queueLength;
 
             // Run the default event handler
             if ($.inArray('onDialogClose', settings.overrideEvents) < 0) {
@@ -558,7 +560,7 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
         },
 
         // Triggered once for each file added to the queue
-        onSelect : function(file) {
+        onSelect: function(file) {
             // Load the swfupload settings
             var settings = this.settings;
 
@@ -582,30 +584,30 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
 
             // Get the size of the file
             var fileSize = Math.round(file.size / 1024);
-            var suffix   = 'KB';
+            var suffix = 'KB';
             if (fileSize > 1000) {
                 fileSize = Math.round(fileSize / 1000);
-                suffix   = 'MB';
+                suffix = 'MB';
             }
             var fileSizeParts = fileSize.toString().split('.');
             fileSize = fileSizeParts[0];
             if (fileSizeParts.length > 1) {
-                fileSize += '.' + fileSizeParts[1].substr(0,2);
+                fileSize += '.' + fileSizeParts[1].substr(0, 2);
             }
             fileSize += suffix;
 
             // Truncate the filename if it's too long
             var fileName = file.name;
             if (fileName.length > 25) {
-                fileName = fileName.substr(0,25) + '...';
+                fileName = fileName.substr(0, 25) + '...';
             }
 
             // Create the file data object
             var itemData = {
-                'fileID'     : file.id,
-                'instanceID' : settings.id,
-                'fileName'   : fileName,
-                'fileSize'   : fileSize
+                'fileID': file.id,
+                'instanceID': settings.id,
+                'fileName': fileName,
+                'fileSize': fileSize
             }
 
             var itemHTML = settings.itemTemplate
@@ -614,20 +616,22 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
             if (itemHTML == false) {
                 itemHTML = ['<div id="${fileID}" class="uploadify-queue-item">',
                     '<div class="cancel">',
-                        '<a href="javascript:;" data-file-id="${fileID}">X</a>',
+                    '<a href="javascript:;" data-file-id="${fileID}">X</a>',
                     '</div>',
                     '<span class="fileName">${fileName} (${fileSize})</span><span class="data"></span>',
                     '<div class="uploadify-progress">',
-                        '<div class="uploadify-progress-bar"><!--Progress Bar--></div>',
+                    '<div class="uploadify-progress-bar"><!--Progress Bar--></div>',
                     '</div>',
-                '</div>'].join('');
+                    '</div>'
+                ].join('');
             }
 
             // Run the default event handler
             if (itemHTML && $.inArray('onSelect', settings.overrideEvents) < 0) {
 
                 // Replace the item data in the template
-                itemHTML = itemHTML.replace(/\$\{([^}]+)\}/g, function($0, $1) { return itemData[$1] || $0 });
+                itemHTML = itemHTML.replace(/\$\{([^}]+)\}/g, function($0, $1) {
+                    return itemData[$1] || $0 });
 
                 // Add the file item to the queue
                 $('#' + settings.queueID).append(itemHTML);
@@ -641,13 +645,13 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
         },
 
         // Triggered when a file is not added to the queue
-        onSelectError : function(file, errorCode, errorMsg) {
+        onSelectError: function(file, errorCode, errorMsg) {
             // Load the swfupload settings
             var settings = this.settings;
 
             // Run the default event handler
             if ($.inArray('onSelectError', settings.overrideEvents) < 0) {
-                switch(errorCode) {
+                switch (errorCode) {
                     case SWFUpload.QUEUE_ERROR.QUEUE_LIMIT_EXCEEDED:
                         if (settings.queueSizeLimit > errorMsg) {
                             this.queueData.errorMsg += '\nThe number of files selected exceeds the remaining upload limit (' + errorMsg + ').';
@@ -659,10 +663,10 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
                         this.queueData.errorMsg += '\nThe file "' + file.name + '" exceeds the size limit (' + settings.fileSizeLimit + ').';
                         break;
                     case SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE:
-						            this.queueData.errorMsg += '\nThe file "' + file.name + '" is empty.';
+                        this.queueData.errorMsg += '\nThe file "' + file.name + '" is empty.';
                         break;
                     case SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT:
-						            this.queueData.errorMsg += '\nThe file "' + file.name + '" is not an accepted file type (' + settings.fileTypeDesc + ').';
+                        this.queueData.errorMsg += '\nThe file "' + file.name + '" is not an accepted file type (' + settings.fileTypeDesc + ').';
                         break;
                 }
             }
@@ -675,14 +679,14 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
         },
 
         // Triggered when all the files in the queue have been processed
-        onQueueComplete : function() {
+        onQueueComplete: function() {
             if (this.settings.onQueueComplete) this.settings.onQueueComplete.call(this, this.settings.queueData);
         },
 
         // Triggered when a file upload successfully completes
-        onUploadComplete : function(file) {
+        onUploadComplete: function(file) {
             // Load the swfupload settings
-            var settings     = this.settings,
+            var settings = this.settings,
                 swfuploadify = this;
 
             // Check if all the files have completed uploading
@@ -715,7 +719,7 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
                         case SWFUpload.FILE_STATUS.COMPLETE:
                             setTimeout(function() {
                                 if ($('#' + file.id)) {
-                                    swfuploadify.queueData.queueSize   -= file.size;
+                                    swfuploadify.queueData.queueSize -= file.size;
                                     swfuploadify.queueData.queueLength -= 1;
                                     delete swfuploadify.queueData.files[file.id]
                                     $('#' + file.id).fadeOut(500, function() {
@@ -728,7 +732,7 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
                             if (!settings.requeueErrors) {
                                 setTimeout(function() {
                                     if ($('#' + file.id)) {
-                                        swfuploadify.queueData.queueSize   -= file.size;
+                                        swfuploadify.queueData.queueSize -= file.size;
                                         swfuploadify.queueData.queueLength -= 1;
                                         delete swfuploadify.queueData.files[file.id];
                                         $('#' + file.id).fadeOut(500, function() {
@@ -749,13 +753,13 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
         },
 
         // Triggered when a file upload returns an error
-        onUploadError : function(file, errorCode, errorMsg) {
+        onUploadError: function(file, errorCode, errorMsg) {
             // Load the swfupload settings
             var settings = this.settings;
 
             // Set the error string
             var errorString = 'Error';
-            switch(errorCode) {
+            switch (errorCode) {
                 case SWFUpload.UPLOAD_ERROR.HTTP_ERROR:
                     errorString = 'HTTP Error (' + errorMsg + ')';
                     break;
@@ -782,7 +786,7 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
                     break;
                 case SWFUpload.UPLOAD_ERROR.FILE_CANCELLED:
                     errorString = 'Cancelled';
-                    this.queueData.queueSize   -= file.size;
+                    this.queueData.queueSize -= file.size;
                     this.queueData.queueLength -= 1;
                     if (file.status == SWFUpload.FILE_STATUS.IN_PROGRESS || $.inArray(file.id, this.queueData.uploadQueue) >= 0) {
                         this.queueData.uploadSize -= file.size;
@@ -804,7 +808,7 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
                 }
 
                 // Reset the progress bar
-                $('#' + file.id).find('.uploadify-progress-bar').css('width','1px');
+                $('#' + file.id).find('.uploadify-progress-bar').css('width', '1px');
 
                 // Add the error message to the queue item
                 if (errorCode != SWFUpload.UPLOAD_ERROR.SPECIFIED_FILE_ID_NOT_FOUND && file.status != SWFUpload.FILE_STATUS.COMPLETE) {
@@ -820,27 +824,27 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
         },
 
         // Triggered periodically during a file upload
-        onUploadProgress : function(file, fileBytesLoaded, fileTotalBytes) {
+        onUploadProgress: function(file, fileBytesLoaded, fileTotalBytes) {
             // Load the swfupload settings
             var settings = this.settings;
 
             // Setup all the variables
-            var timer            = new Date();
-            var newTime          = timer.getTime();
-            var lapsedTime       = newTime - this.timer;
+            var timer = new Date();
+            var newTime = timer.getTime();
+            var lapsedTime = newTime - this.timer;
             if (lapsedTime > 500) {
                 this.timer = newTime;
             }
-            var lapsedBytes      = fileBytesLoaded - this.bytesLoaded;
-            this.bytesLoaded     = fileBytesLoaded;
+            var lapsedBytes = fileBytesLoaded - this.bytesLoaded;
+            this.bytesLoaded = fileBytesLoaded;
             var queueBytesLoaded = this.queueData.queueBytesUploaded + fileBytesLoaded;
-            var percentage       = Math.round(fileBytesLoaded / fileTotalBytes * 100);
+            var percentage = Math.round(fileBytesLoaded / fileTotalBytes * 100);
 
             // Calculate the average speed
             var suffix = 'KB/s';
             var mbs = 0;
             var kbs = (lapsedBytes / 1024) / (lapsedTime / 1000);
-                kbs = Math.floor(kbs * 10) / 10;
+            kbs = Math.floor(kbs * 10) / 10;
             if (this.queueData.averageSpeed > 0) {
                 this.queueData.averageSpeed = Math.floor((this.queueData.averageSpeed + kbs) / 2);
             } else {
@@ -867,23 +871,23 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
         },
 
         // Triggered right before a file is uploaded
-        onUploadStart : function(file) {
+        onUploadStart: function(file) {
             // Load the swfupload settings
             var settings = this.settings;
 
-            var timer        = new Date();
-            this.timer       = timer.getTime();
+            var timer = new Date();
+            this.timer = timer.getTime();
             this.bytesLoaded = 0;
             if (this.queueData.uploadQueue.length == 0) {
                 this.queueData.uploadSize = file.size;
             }
             if (settings.checkExisting) {
                 $.ajax({
-                    type    : 'POST',
-                    async   : false,
-                    url     : settings.checkExisting,
-                    data    : {filename: file.name},
-                    success : function(data) {
+                    type: 'POST',
+                    async: false,
+                    url: settings.checkExisting,
+                    data: { filename: file.name },
+                    success: function(data) {
                         if (data == 1) {
                             var overwrite = confirm('A file with the name "' + file.name + '" already exists on the server.\nWould you like to replace the existing file?');
                             if (!overwrite) {
@@ -907,11 +911,11 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
         },
 
         // Triggered when a file upload returns a successful code
-        onUploadSuccess : function(file, data, response) {
+        onUploadSuccess: function(file, data, response) {
 
             // Load the swfupload settings
             var settings = this.settings;
-            var stats    = this.getStats();
+            var stats = this.getStats();
 
             this.queueData.uploadsSuccessful = stats.successful_uploads;
             this.queueData.queueBytesUploaded += file.size;
@@ -930,13 +934,27 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
             // Call the user-defined event handler
             if (settings.onUploadSuccess) settings.onUploadSuccess.call(this, file, data, response);
         }
-    };// }}}
+    }; // }}}
 
     var guidSeed = (((1 + Math.random()) * 0x10000) | 0);
-    function guid(i){return i=i||'',i+(++guidSeed).toString(32)}
+
+    function guid(i) {
+        return i = i || '', i + (++guidSeed).toString(32) }
+
     function noop() {}
-    function implEventEmitter(n,e){n=n||{};var t=$(n),o=Array.prototype.slice;return e=e||n.name,$.each({on:"on",un:"off",once:"one",emit:"trigger"},function(r,i){n[r]=function(n){var c=o.call(arguments,0),u=c[1];return e&&!~n.indexOf(".")&&(c[0]=n+"."+e),"function"==typeof u&&("on"===r||"once"===r?c[1]=u.__||(u.__=function(n){return n.preventDefault(),u.apply(this,o.call(arguments,1))}):"un"===r&&(c[1]=u.__)),t[i].apply(t,c)}}),n}
-    function capitalize(s) { return s.replace(/\b[a-z]/g, function($0) { return $0.toUpperCase() }) }
+
+    function implEventEmitter(n, e) { n = n || {};
+        var t = $(n),
+            o = Array.prototype.slice;
+        return e = e || n.name, $.each({ on: "on", un: "off", once: "one", emit: "trigger" }, function(r, i) { n[r] = function(n) {
+                var c = o.call(arguments, 0),
+                    u = c[1];
+                return e && !~n.indexOf(".") && (c[0] = n + "." + e), "function" == typeof u && ("on" === r || "once" === r ? c[1] = u.__ || (u.__ = function(n) {
+                    return n.preventDefault(), u.apply(this, o.call(arguments, 1)) }) : "un" === r && (c[1] = u.__)), t[i].apply(t, c) } }), n }
+
+    function capitalize(s) {
+        return s.replace(/\b[a-z]/g, function($0) {
+            return $0.toUpperCase() }) }
 
     /**
      * FlashUpload class implements
@@ -969,9 +987,9 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
      */
     function FlashUpload(placeholder, options, swfUploadOptions) {
 
-        var self = this
-          , cfg = $.extend({}, options)
-          , $holder = $(placeholder)
+        var self = this,
+            cfg = $.extend({}, options),
+            $holder = $(placeholder)
 
         if (!$holder[0]) {
             throw Error('Initialize flash upload error, invalid holder node.');
@@ -987,27 +1005,29 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
         implEventEmitter(self);
 
         var events = [
-          'cancel',
-          'clearQueue',
-          'destroy',
-          'dialogClose',
-          'dialogOpen',
-          'disable',
-          'enable',
-          // 'init',
-          'initError',
-          'fallback',
-          'queueComplete',
-          'selectError',
-          'select',
-          'SWFReady',
-          'uploadComplete',
-          'uploadError',
-          'uploadSuccess',
-          'uploadProgress',
-          'uploadStart' ]
+            'cancel',
+            'clearQueue',
+            'destroy',
+            'dialogClose',
+            'dialogOpen',
+            'disable',
+            'enable',
+            // 'init',
+            'initError',
+            'fallback',
+            'queueComplete',
+            'selectError',
+            'select',
+            'SWFReady',
+            'uploadComplete',
+            'uploadError',
+            'uploadSuccess',
+            'uploadProgress',
+            'uploadStart'
+        ]
 
-        $.each(events, function(i, event, handleName) { handleName = 'on' + capitalize(event);
+        $.each(events, function(i, event, handleName) {
+            handleName = 'on' + capitalize(event);
 
             // Wrap buildin event handle, `onEventName`
             // The events callback will be invoked with **this** bound to `SWFUpload` context
@@ -1064,7 +1084,10 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
             switch (type) {
                 case 'uploadSuccess':
                     // ARGS: [ file, data, result ]
-                    var file = args[0], data = args[1], errorCode = +data.error, isError = isNaN(errorCode) || errorCode;
+                    var file = args[0],
+                        data = args[1],
+                        errorCode = +data.error,
+                        isError = isNaN(errorCode) || errorCode;
                     // Rewrite onUploadSuccess to handler upload api errors
                     if (isError) {
                         args[2] = false;
@@ -1075,9 +1098,11 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
                 case 'uploadError':
                     // ARGS: [ file, errorCode, errorMsg, errorString ]
                     // Normalize uploadError event parameters
-                    args = [ args[0], { error: args[1],
-                                        messageg: args[2],
-                                        data: args[3] } ];
+                    args = [args[0], {
+                        error: args[1],
+                        messageg: args[2],
+                        data: args[3]
+                    }];
                     break;
             }
             self.emit(type, args); // jquery event handler will flat event args
@@ -1117,10 +1142,10 @@ Last modified by Allex Wang (allex.wxn@gmail.com)
      * @return {FlashUpload} Returns a new {FlashUpload} instance
      */
     exports.uploadify = function(holder, options) {
-        var $el = $(holder), o = $el.data('uploader');
+        var $el = $(holder),
+            o = $el.data('uploader');
 
         // Initialize uploadify
         return o || (o = new FlashUpload(holder, options, arguments[2]), $el.data('uploader', o), o);
     };
-
-}));
+});
