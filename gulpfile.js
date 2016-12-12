@@ -80,7 +80,6 @@ gulp.task('copy-md', function() {
 
 //copy-images
 gulp.task('copy-images', function() {
-    console.log(CONFIG);
     return gulp.src(CONFIG.images.src)
         .pipe(gulp.dest(CONFIG.images.dest))
 });
