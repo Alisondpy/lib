@@ -96,7 +96,9 @@ define(function(require, exports, module) {
             if (/exceeds the size limit/.test(msg)) {
                 msg = '单个上传图片不能超过' + _this._options.fileSizeLimit;
             }
-            msg && Box.error(msg);
+            if (msg != 'Some files were not added to the queue:') {
+                msg && Box.error(msg);
+            }
         });
     }
 
