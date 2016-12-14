@@ -546,7 +546,7 @@ define(function(require, exports, module) {
             // Run the default event handler
             if ($.inArray('onDialogClose', settings.overrideEvents) < 0) {
                 if (this.queueData.filesErrored > 0) {
-                    alert(this.queueData.errorMsg);
+                    // alert(this.queueData.errorMsg);
                 }
             }
 
@@ -773,7 +773,7 @@ define(function(require, exports, module) {
                     errorString = 'Security Error';
                     break;
                 case SWFUpload.UPLOAD_ERROR.UPLOAD_LIMIT_EXCEEDED:
-                    alert('The upload limit has been reached (' + errorMsg + ').');
+                    // alert('The upload limit has been reached (' + errorMsg + ').');
                     errorString = 'Exceeds Upload Limit';
                     break;
                 case SWFUpload.UPLOAD_ERROR.UPLOAD_FAILED:

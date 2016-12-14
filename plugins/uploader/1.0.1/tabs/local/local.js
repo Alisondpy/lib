@@ -24,7 +24,7 @@ define(function(require, exports, module) {
             title: '本地上传',
             fileTypeExts: '*.png;*.jpg;*.gif;*.bmp',
             fileTypeDesc: '图片文件，支持:.png,.jpg,.gif,.bmp',
-            fileSizeLimit: '2048KB', // 单个图片大小限制,默认2M
+            fileSizeLimit: '5120KB', // 单个图片大小限制,默认5M
             formData: { // 给 uploader 的参数
             },
             swf: 'http://s1.zhongzhihui.com/lib/plugins/uploader/1.0.1/uploadify.swf',
@@ -77,7 +77,27 @@ define(function(require, exports, module) {
         var _this = this;
         // initialize upload
         _this.uploader = Upload.uploadify(_this._nodes['btn-upload'][0], _this._options);
+        _this._initEvent();
         _this._onEvent();
+    }
+
+    Local.prototype._initEvent = function() {
+        var _this = this;
+        _this.uploader.on('initError', function(args) {
+            Box.error('sorry,flash不兼容或没安装！');
+        });
+        //ARGS: [ file, errorCode, errorMsg, errorString ]
+        _this.uploader.on('uploadError', function(args) {
+            var msg = (args && args[1] && args[1].errorMsg) || null;
+            msg && Box.error(msg);
+        });
+        _this.uploader.on('dialogClose', function(uploader) {
+            var msg = (uploader && uploader.errorMsg) || null;
+            if (/exceeds the size limit/.test(msg)) {
+                msg = '单个上传图片不能超过' + _this._options.fileSizeLimit;
+            }
+            msg && Box.error(msg);
+        });
     }
 
     Local.prototype.add = function(item) {
