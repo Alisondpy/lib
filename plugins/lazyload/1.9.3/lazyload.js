@@ -21,7 +21,7 @@
  *    effect: 'fadeIn', // cumstomize jquery effect for holder appear, defaults to show
  *    dataAttribute: 'src', // <img data-src=""
  *    skipInvisible: true,  // skip load thoses elements invisible
- *    loadingClass: 'img-loading', // Sets a class for item before origin loaded
+ *    loadingClass: 'img-error', // Sets a class for item before origin loaded
  *    placeholder: 'data:image/png;base64, ...', // should be a image url if typed with a image loader.
  *    ...
  *  });
