@@ -55,8 +55,9 @@ define(function(require, exports, module) {
     // @param {Object} options The request parameter object
     var sendRequest = function() {
         var MAX_PARALLEL_COUNT = 5 // The max parallel size of network request
-          , currentCount = 0
-          , queue = []
+            ,
+            currentCount = 0,
+            queue = []
         var next = function() {
             setImmediate(function() {
                 --currentCount;
@@ -65,13 +66,15 @@ define(function(require, exports, module) {
         }
         var process = function() {
             if (queue.length > 0 && currentCount < MAX_PARALLEL_COUNT) {
-                var reqObj = queue.shift(), client = reqObj[0], options = reqObj[1];
+                var reqObj = queue.shift(),
+                    client = reqObj[0],
+                    options = reqObj[1];
                 ++currentCount;
-                client.always( next );
+                client.always(next);
                 $.ajax(options);
             }
         }
-        return function( client, conf ) {
+        return function(client, conf) {
             queue.push([client, conf]);
             process();
         }
@@ -100,10 +103,10 @@ define(function(require, exports, module) {
     };
     extend(ClientRequest.prototype, {
         send: function() {
-            var self = this
-              , originOption = this._opts
-              , options = extend({}, originOption)
-              , jsonp = options.dataType === 'jsonp';
+            var self = this,
+                originOption = this._opts,
+                options = extend({}, originOption),
+                jsonp = options.dataType === 'jsonp';
 
             // FIXED: jquery should allow cross domain when use jsonp request.
             if (jsonp) {
@@ -111,15 +114,17 @@ define(function(require, exports, module) {
             }
 
             options.complete = function(xhr, status) {
-                var response
-                  , statusCode = +xhr.status
-                  , result = xhr.responseJSON
-                  , unknownErr = { error: '1',
-                                   msg: 'Request error (status: ' + (status || statusCode) + ')' }
-                  // TODO: We need to strict the response. Normally jQuery.ajax()
-                  //    will throw a status "parsererror" if api response empty or
-                  //    malformed response.  eg. (status !== 'parsererror')
-                  , isSuccess = (statusCode === 200 || status === 'success')
+                var response, statusCode = +xhr.status,
+                    result = xhr.responseJSON,
+                    unknownErr = {
+                        error: '1',
+                        msg: 'Request error (status: ' + (status || statusCode) + ')'
+                    }
+                    // TODO: We need to strict the response. Normally jQuery.ajax()
+                    //    will throw a status "parsererror" if api response empty or
+                    //    malformed response.  eg. (status !== 'parsererror')
+                    ,
+                    isSuccess = (statusCode === 200 || status === 'success')
 
                 if (!jsonp && !result) {
                     result = trim(xhr.responseText);
@@ -172,6 +177,10 @@ define(function(require, exports, module) {
     exports.on('request', function(request, sender) {
         sender = sender && $(sender);
         if (sender) {
+            if (+sender.attr('data-async-lock') === 1) {
+                return;
+            }
+            sender.attr('data-interval', new Date() * 1);
             var lockerClass = 'disabled';
             sender.addClass(lockerClass).prop('disabled', true);
             request.once('end', function() {
@@ -190,7 +199,8 @@ define(function(require, exports, module) {
      *                         All settings are optional.
      * @param {HTMLElement|jQuery} sender jQuery instance or a valid DOM reference.
      */
-    exports.ajax = function( url, options, sender ) {
+    exports.ajax = function(url, options, sender, interval) {
+        interval = interval || 1000;
         // shift arguments if url was omitted
         if (typeof url === 'object') {
             sender = options;
@@ -206,9 +216,11 @@ define(function(require, exports, module) {
             handleRunnerError = function(e, data) {
                 var stack = e.stack && e.stack.split('\n').slice(0, 2).join('\n') || e;
                 // extends runtime error with ajax meta info.
-                var ex = {stack: stack,
-                          origin: options,
-                          response: data };
+                var ex = {
+                    stack: stack,
+                    origin: options,
+                    response: data
+                };
                 notify('error', ex, data);
                 setImmediate(function() { console.log('%c ' + stack, 'color:#ae0000') }, 1)
             },
@@ -236,10 +248,21 @@ define(function(require, exports, module) {
             sender.attr(lockerAttr, 1);
             request.once('response error', function() {
                 if (sender) {
-                    sender.attr(lockerAttr, 0);
+                    //如果两次提交的时间间隔少于1000ms阻止提交
+                    var senderInterval = sender.attr('data-interval');
+                    var currentTime = new Date() * 1;
+                    var diffTime = currentTime - senderInterval;
+                    if (diffTime > interval) {
+                        sender.attr(lockerAttr, 0);
+                        sender = null;
+                    } else {
+                        setTimeout(function() {
+                            sender.attr(lockerAttr, 0);
+                            sender = null;
+                        }, (interval - diffTime));
+                    }
                     if (lockerText)
                         sender.html(tmp);
-                    sender = null;
                 }
             });
         }
@@ -267,7 +290,7 @@ define(function(require, exports, module) {
                 error(err);
                 return;
             }
-            if ( !res || +(res.error || 0) !== 0 ) {
+            if (!res || +(res.error || 0) !== 0) {
                 error(res);
             } else {
                 success(res);
@@ -277,9 +300,9 @@ define(function(require, exports, module) {
         return request.send();
     };
 
-    $.each([ 'get', 'post', 'jsonp' ], function(i, method) {
-        exports[ method ] = function( url, data, callback, error, sender ) {
-
+    $.each(['get', 'post', 'jsonp'], function(i, method) {
+        exports[method] = function(url, data, callback, error, sender, interval) {
+            interval = interval || 1000;
             // shift arguments if data argument was omitted
             if (typeof data === 'function') {
                 sender = sender || error;
@@ -313,7 +336,7 @@ define(function(require, exports, module) {
             }
             options.type = type;
 
-            return exports.ajax(options, sender);
+            return exports.ajax(options, sender, interval);
         };
     });
 
